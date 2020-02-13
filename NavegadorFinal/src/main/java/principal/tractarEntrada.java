@@ -198,15 +198,6 @@ public class tractarEntrada {
 				}
 			}
 			break;
-		case "log":
-			if (len == 2) {
-				this.option = navegador.commandType.LOG;
-				this.params = new String[1];
-				this.params[0]=args[1];
-			} else {
-				error = 2;
-			}	
-			break;
 		case "exit":
 			if (len == 1) {
 				this.option = navegador.commandType.EXIT;

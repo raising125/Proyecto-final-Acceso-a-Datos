@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class navegador {
 	protected enum commandType {
 		LOGIN, GOTO, GOLAST, LIST, UP, INFOFILE, INFODIR, HELP, CREATEDIR, CREATEFILE, 
-		SORTBY, DELETEDIR, DELETEFILE, LOADFILE, EXEC, LOG, CLEARLOG, IDIOMA, SAVEXMLTREE,
+		SORTBY, DELETEDIR, DELETEFILE, LOADFILE, EXEC, CLEARLOG, IDIOMA, SAVEXMLTREE,
 		LOADXMLTREE, GETERRORS, GETWARNINGS, SETPERMISSION, SAVEJSONTREE, LOADJSONTREE,
 		SETLITERAL, EXIT
 	}
@@ -134,18 +134,6 @@ public class navegador {
 					utils.exec(params[0], dir);
 					if (log)
 						utils.log("EXEC");
-					break;
-				case LOG:
-					// This only toggles log
-					if (params[0].equals("1")) {
-						log = true;
-						utils.log("log");
-					} else if (params[0].equals("0")) {
-						log = false;
-						utils.log("nolog");
-					} else {
-						System.out.println("Needs to be 1 or 0");
-					}
 					break;
 				case CLEARLOG:
 					utils.clear();
