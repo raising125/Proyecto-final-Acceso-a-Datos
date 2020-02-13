@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-//Banana
+
 @Entity
 @Table(name = "literal")
 public class literal {

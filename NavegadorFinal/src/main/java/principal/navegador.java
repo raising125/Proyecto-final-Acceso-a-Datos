@@ -135,6 +135,18 @@ public class navegador {
 					if (log)
 						utils.log("EXEC");
 					break;
+				case LOG:
+					// This only toggles log
+					if (params[0].equals("1")) {
+						log = true;
+						utils.log("log");
+					} else if (params[0].equals("0")) {
+						log = false;
+						utils.log("nolog");
+					} else {
+						System.out.println("Needs to be 1 or 0");
+					}
+					break;
 				case CLEARLOG:
 					utils.clear();
 					System.out.println("Cleared");
