@@ -184,6 +184,7 @@ public class tractarEntrada {
 			this.option = navegador.commandType.CLEARLOG;
 			break;
 		case "load":
+			this.option = navegador.commandType.LOADFILE;
 			if (len != 1) {
 				this.params = new String[1];
 				if (len > 2) {
