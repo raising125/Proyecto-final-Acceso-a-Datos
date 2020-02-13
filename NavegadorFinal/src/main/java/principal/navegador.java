@@ -151,7 +151,6 @@ public class navegador {
 					utils.clear();
 					System.out.println("Cleared");
 					break;
-				case LOAD:
 					utils.load(params[0], dir);
 					break;
 				case EXIT:
