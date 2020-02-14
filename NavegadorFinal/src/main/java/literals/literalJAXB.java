@@ -9,7 +9,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 public class literalJAXB {
-private List<literalXml> _literals;
+private List<entitatsXml.literal> _literals;
 private boolean _carregat;
 private File _fitxerLiterals;
 private String _idioma;
@@ -35,22 +35,20 @@ _literals = unMarshalingLiteralXml(this._fitxerLiterals);
 /*
 * Passar d'xml a objecte
 */
-public static List<literalXml> unMarshalingLiteralXml(File fitxer) throws JAXBException
+public static List<entitatsXml.literal> unMarshalingLiteralXml(File fitxer) throws JAXBException
 {
 
-JAXBContext jContext = JAXBContext.newInstance(literal.class);
+JAXBContext jContext = JAXBContext.newInstance(entitatsXml.literalList.class);
 Unmarshaller jUnmarshaller = jContext.createUnmarshaller();
-literal unmarshaledList = (literal) jUnmarshaller.unmarshal(fitxer);
+entitatsXml.literalList unmarshaledList = (entitatsXml.literalList) jUnmarshaller.unmarshal(fitxer);
 return unmarshaledList.getliterals();
 }
 
-/*
-* Consultar la informaicó de la llista d'objectes.
-*/
+
 public String obtenirLiteral(String literal) {
 try {
 if (this._carregat) {
-List<literalXml> auxLits = _literals.stream() // convert list to stream
+List<entitatsXml.literal> auxLits = _literals.stream() // convert list to stream
 .filter(lit -> literal.equals(lit.getId())) // we dont like mkyong
 .collect(Collectors.toList());
 if (auxLits != null && auxLits.size() > 0) {

@@ -1,15 +1,30 @@
 package entitatsXml;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "literalList")
+
+@XmlRootElement(name = "literals")
 public class literalList {
-	private literal [] literalist;
-	   
-	   @XmlElementWrapper
-	   @XmlElement(name="literalist")
-	   literal [] getUnArray() {
-	      return this.literalist;
-	   }
+	private List<entitatsXml.literal> _literal;
+
+	public literalList() {
+		super();
+	}
+
+	@XmlElement(name = "literal")
+	public List<literal> getliterals() {
+		if (_literal == null) {
+			_literal = new ArrayList<literal>();
+		}
+		return _literal;
+	}
+
+	public void setEmployee(List<literal> literalList) {
+		this._literal = literalList;
+	}
+
 }
