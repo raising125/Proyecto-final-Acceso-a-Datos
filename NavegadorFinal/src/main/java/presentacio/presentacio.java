@@ -1,5 +1,7 @@
 package presentacio;
 
-public class presentacio {
+public abstract class presentacio {
 
+	
+	
 }

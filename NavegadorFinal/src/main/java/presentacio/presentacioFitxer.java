@@ -1,5 +1,5 @@
 package presentacio;
 
-public class presentacioFitxer {
+public class presentacioFitxer extends presentacio{
 
 }

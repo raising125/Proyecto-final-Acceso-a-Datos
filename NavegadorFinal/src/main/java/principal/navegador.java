@@ -148,6 +148,28 @@ public class navegador {
 					utils.print("exit");
 					done = true;
 					break;
+				case GETERRORS:
+					break;
+				case GETWARNINGS:
+					break;
+				case IDIOMA:
+					break;
+				case LOADJSONTREE:
+					break;
+				case LOADXMLTREE:
+					break;
+				case LOGIN:
+					break;
+				case SAVEJSONTREE:
+					break;
+				case SAVEXMLTREE:
+					break;
+				case SETLITERAL:
+					break;
+				case SETPERMISSION:
+					break;
+				default:
+					break;
 				}
 			} else {
 				System.out.println("An error ocurred");
