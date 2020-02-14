@@ -17,11 +17,11 @@ public class usuari {
 	@Column(name = "usuari_username")
 	private String _username;
 	@Column(name = "usuari_password")
-	private Date _password;
+	private String _password;
 	
 	public usuari(){ }
 	
-	public usuari(int id, String user, Date pass){
+	public usuari(int id, String user, String pass){
 		this.set_id(id);
 		this.set_username(user);
 		this.set_password(pass);
@@ -43,11 +43,11 @@ public class usuari {
 		this._username = _username;
 	}
 
-	public Date get_password() {
+	public String get_password() {
 		return _password;
 	}
 
-	public void set_password(Date _password) {
+	public void set_password(String _password) {
 		this._password = _password;
 	}
 
