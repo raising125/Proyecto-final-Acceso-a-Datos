@@ -32,17 +32,18 @@ import org.xml.sax.SAXException;
 public class utils {
 	// Objecte de InputChecker per a poder mirar l'imput per al Load
 		private tractarEntrada input;
-		// Objecte d'acces a base de dades: nom del Schema "consola", vaig personalitzar
-		// la llista dwe literals per a la meva aplicacio
+		private String currDir;
 		public utils() {
 			input = new tractarEntrada();
 		}
-
+		public void setDir(String d) {
+			this.currDir=d;
+		}
 		public void list(File dir, String[] param) {
 			File newdir;
 			File stuff[];
 			if (param!=null && param[0] != null) {
-				newdir = new File(param[0]);
+				newdir = new File(currDir+"/"+param[0]);
 				if (newdir != null && newdir.isDirectory()) {
 					stuff = newdir.listFiles();
 				} else {
@@ -60,7 +61,7 @@ public class utils {
 			}
 		}
 
-		public boolean sortby(File dir, String[] criteria) {
+		public void sortby(File dir, String[] criteria) {
 			String crit = criteria[0].toLowerCase();
 			if (crit == null) {
 				list(dir, null);
@@ -94,35 +95,33 @@ public class utils {
 					break;
 				}
 			}
-			return true;
 		}
 
 		public void help() {
 			System.out.println("The supported commands are: ");
 			System.out.println("GOTO          Go to a certain directory:");
-			System.out.println("                  Argument: the absolute path where you want to go \n");
+			System.out.println("                  Argument: the relative path where you want to go \n");
 			System.out.println("GOLAST        Go to the last visited directory:");
 			System.out.println("                  Arguments: none \n");
 			System.out.println("LIST          List elements of a directory:");
-			System.out.println(
-					"                  Arguments: none(lists your current directory) or 1 argument(a directory to list) \n");
+			System.out.println("                  Arguments: none(lists your current directory) or 1 argument(a directory to list) \n");
 			System.out.println("UP            Go to the parent directory:");
 			System.out.println("                  Argument: none \n");
 			System.out.println("INFOFILE      Get information about a particular file:");
-			System.out.println("                  Argument: an absolute path that can have spaces \n");
+			System.out.println("                  Argument: a relative path that can have spaces \n");
 			System.out.println("INFODIR       Information about a directory:");
-			System.out.println("                  Argument: an absolute path that can have spaces \n");
+			System.out.println("                  Argument: a relative path that can have spaces \n");
 			System.out.println("HELP          Print all commands on screen \n");
 			System.out.println("CREATEDIR     Create directory:");
-			System.out.println("                  Argument: an absolute path \n");
+			System.out.println("                  Argument: a relative path \n");
 			System.out.println("CREATEFILE    Create file:");
-			System.out.println("                  Argument: an absolute path \n");
+			System.out.println("                  Argument: a relative path \n");
 			System.out.println("SORTBY        Like LIST but being able to sort the result by a particular criteria:");
 			System.out.println("                  1 text argument: Date or Name \n");
 			System.out.println("DELETEDIR     Delete one or more directories:");
-			System.out.println("                  Argument: an absolute path \n");
+			System.out.println("                  Argument: a relative path \n");
 			System.out.println("DELEFILE      Delete one or more files:");
-			System.out.println("                  Argument: an absolute path \n");
+			System.out.println("                  Argument: a relative path \n");
 			System.out.println("EXEC          Executes an executable file:");
 			System.out.println("                  Arguments: the name of the file \n");
 			System.out.println("                  It's necesary to be at the directory where the file is \n");
@@ -130,15 +129,14 @@ public class utils {
 			System.out.println("                  Arguments: none \n");
 			System.out.println("LOG           Switches the log on or off");
 			System.out.println("                  Argument: either a 1 or a 0 \n");
-			System.out.println(
-					"LOAD          Reads a texts file and executes the instructions that it has inside sequentially");
+			System.out.println("LOAD          Reads a texts file and executes the instructions that it has inside sequentially");
 			System.out.println("                  Argument: an absolute path \n");
 			System.out.println("EXIT          Exits this program");
 
 		}
 
 		public File go(String[] param) {
-			File dir = new File(param[0]);
+			File dir = new File(currDir+"/"+param[0]);
 			if (dir.isDirectory()) {
 				return dir;
 			} else {
@@ -157,11 +155,10 @@ public class utils {
 			} else {
 				return null;
 			}
-
 		}
 
 		public void infoFile(String s) {
-			File file = new File(s);
+			File file = new File(currDir+"/"+s);
 			if (file.isFile()) {
 				System.out.println("Name: " + file.getName());
 				Path path = Paths.get(file.getPath());
@@ -183,7 +180,7 @@ public class utils {
 		}
 
 		public void infoDir(String s) {
-			File dir = new File(s);
+			File dir = new File(currDir+"/"+s);
 			if (dir.isDirectory()) {
 				System.out.println("Name: " + dir.getName());
 				Path path = Paths.get(dir.getPath());
@@ -205,7 +202,7 @@ public class utils {
 		}
 
 		public void createDir(String stnewdir) {
-			File ndir = new File(stnewdir);
+			File ndir = new File(currDir+"/"+stnewdir);
 			if (ndir.exists()) {
 				System.out.println("This directory already exists");
 			} else {
@@ -215,7 +212,7 @@ public class utils {
 		}
 
 		public void createFile(String stnewfile) {
-			File nfile = new File(stnewfile);
+			File nfile = new File(currDir+"/"+stnewfile);
 			if (nfile.exists()) {
 				System.out.println("This file already exists");
 			} else {
@@ -231,14 +228,14 @@ public class utils {
 			}
 		}
 
-		public void deleteDir(String dir, File current) {
+		public void deleteDir(String dir) {
 			File del;
 			if (dir == null) {
-				del = current;
+				del = new File(currDir);
 			} else {
-				del = new File(dir);
+				del = new File(currDir+"/"+dir);
 			}
-			if (del.exists()) {
+			if (del.isDirectory()) {
 				if (del.delete()) {
 					print("deletedcorrectly");
 				} else {
@@ -250,8 +247,8 @@ public class utils {
 		}
 
 		public void deleteFile(String dir) {
-			File del = new File(dir);
-			if (del.exists()) {
+			File del = new File(currDir+"/"+dir);
+			if (del.isFile()) {
 				if (del.delete()) {
 					print("deletedcorrectly");
 				} else {
@@ -262,14 +259,13 @@ public class utils {
 			}
 		}
 
-		public void exec(String execname, File dir) {
-			String execpath = dir.getAbsolutePath() + "\\" + execname;
+		public void exec(String execname) {
+			String execpath = currDir + "\\" + execname;
 			File exe = new File(execpath);
-			System.out.println(execpath);
 			if (exe.isFile()) {
 				if (exe.canExecute()) {
 					try {
-						Runtime.getRuntime().exec(execpath, null, dir);
+						Runtime.getRuntime().exec(execpath, null, new File(currDir));
 					} catch (IOException e) {
 						System.out.println(e.getMessage());
 					}
@@ -377,13 +373,13 @@ public class utils {
 							createFile(params[0]);
 							break;
 						case DELETEDIR:
-							deleteDir(params[0], dir);
+							deleteDir(params[0]);
 							break;
 						case DELETEFILE:
 							deleteFile(params[0]);
 							break;
 						case EXEC:
-							exec(params[0], dir);
+							exec(params[0]);
 							break;
 						default:
 							System.out.println("This operation is not supported on this mode");

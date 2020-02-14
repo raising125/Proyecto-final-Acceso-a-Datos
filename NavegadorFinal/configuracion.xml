@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuracion>
+	<logs>activado</logs>//desactivado
+	<metodoSubidaLogs>blocs</metodoSubidaLogs>//individual
+    <tecnologiaGuardarLogs>texto</tecnologiaGuardarLogs>//sql, mongo
+    <permisos></permisos>
+    <idioma>es</idioma>//cat, eng
+</configuracion>
