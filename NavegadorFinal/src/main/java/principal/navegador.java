@@ -43,6 +43,7 @@ public class navegador {
 		boolean log = true;
 		while (!done) {
 			System.out.println(dir);
+			utils.setDir(dir.getAbsolutePath());
 			utils.print("insertcommand");
 			command = s.nextLine();
 			com = command.split(" ");
@@ -81,14 +82,15 @@ public class navegador {
 					break;
 				case UP:
 					temp = utils.up(dir);
-					if (temp == null)
-						System.out.println("Impossible operation");
-					else
+					if (temp == null) {
+						utils.print("nodir");
+					}else {
 						prevdir = dir;
-					dir = temp;
-					utils.list(dir, null);
-					if (log)
-						utils.log("UP succesful");
+						dir = temp;
+						utils.list(dir, null);
+						if (log)
+							utils.log("UP succesful");
+					}
 					break;
 				case LIST:
 					utils.list(dir, params);
@@ -121,7 +123,7 @@ public class navegador {
 						utils.log("CREATEFILE");
 					break;
 				case DELETEDIR:
-					utils.deleteDir(params[0], dir);
+					utils.deleteDir(params[0]);
 					if (log)
 						utils.log("DELETEDIR");
 					break;
@@ -131,7 +133,7 @@ public class navegador {
 						utils.log("DELETEFILE");
 					break;
 				case EXEC:
-					utils.exec(params[0], dir);
+					utils.exec(params[0]);
 					if (log)
 						utils.log("EXEC");
 					break;
