@@ -1,5 +1,6 @@
 package configuracio;
 
-public class configuracio {
-//banana
-	}
+	
+public abstract class configuracio {
+
+}

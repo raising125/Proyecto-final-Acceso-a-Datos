@@ -15,21 +15,19 @@ import com.mongodb.client.model.Filters;
 
 import entitatsHib.literal;
 
-
-
-
 public class configuracioMongoDB {
 	private MongoDatabase db;
-	public configuracioMongoDB (MongoDatabase db) {
+	public configuracioMongoDB(MongoDatabase db) {
 		this.db = db;
 	}
-	public void importarSesion(Session _session, MongoDatabase db) {
+	public void importarSesion(Session _session) {
 		List<literal> result = (List<literal>) _session.createQuery("from literal").list();
 		List<Document> lDoc = new ArrayList<Document>();
 		{
 
 			for (literal l : result) {
-				Document oLit = new Document().append("lit_id", l.get_id()).append("idi_cod", l.get_idioma()).append("lit_clau", l.get_tipo_error()).append("lit_text", l.get_error());
+				Document oLit = new Document().append("lit_id", l.get_id()).append("idi_cod", l.get_idioma())
+						.append("lit_clau", l.get_tipo_error()).append("lit_text", l.get_error());
 				lDoc.add(oLit);
 
 			}
