@@ -1,31 +1,54 @@
-package entitatsXml;
+ package entitatsXml;
 
-import java.util.ArrayList;
-import java.util.List;
-
+ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import literals.literalXml;
+ @XmlRootElement(name = "literal")
+ public class literal {
+ public String _id;
+ public String _lites;
+ public String _litcat;
+ public String _liten;
 
-@XmlRootElement(name = "literals")
-public class literal {
-	private List<literalXml> _literal;
+ public literal() {
+ super();
+ }
 
-	public literal() {
-		super();
-	}
+ @XmlAttribute(name = "id")
+ public String getId() {
+ return _id;
+ }
 
-	@XmlElement(name = "literal")
-	public List<literalXml> getliterals() {
-		if (_literal == null) {
-			_literal = new ArrayList<literalXml>();
-		}
-		return _literal;
-	}
+ public void setId(String id) {
+ this._id = id;
+ }
 
-	public void setEmployee(List<literalXml> literalList) {
-		this._literal = literalList;
-	}
+ @XmlElement(name = "es")
+ public String getlites() {
+ return _lites;
+ }
 
-}
+ public void setlites(String es) {
+ this._lites = es;
+ }
+
+ @XmlElement(name = "en")
+ public String getliten() {
+ return _liten;
+ }
+
+ public void setliten(String en) {
+ this._liten = en;
+ }
+
+ @XmlElement(name = "cat")
+ public String getlitcat() {
+ return _litcat;
+ }
+
+ public void setlitcat(String cat) {
+ this._litcat = cat;
+ }
+
+ }

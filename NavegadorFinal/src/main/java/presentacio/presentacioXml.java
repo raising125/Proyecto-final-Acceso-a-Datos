@@ -1,5 +1,5 @@
 package presentacio;
 
-public class presentacioXml {
+public class presentacioXml extends presentacio{
 
 }

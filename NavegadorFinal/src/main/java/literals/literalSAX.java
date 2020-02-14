@@ -15,7 +15,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class literalSAX {
-	private List<literalXml> _literals;
+	private List<entitatsXml.literal> _literals;
 	private boolean _carregat;
 	private File _fitxerLiterals;
 	private String _idioma;
@@ -54,8 +54,8 @@ public class literalSAX {
 	 */
 	class SAXHandler extends DefaultHandler {
 
-		List<literalXml> literals = new ArrayList<>();
-		literalXml lit = null;
+		List<entitatsXml.literal> literals = new ArrayList<>();
+		entitatsXml.literal lit = null;
 
 		@Override
 		// Triggered when the start of tag is found.
@@ -65,7 +65,7 @@ public class literalSAX {
 			switch (qName) {
 			// Create a new Employee object when the start tag is found
 			case "literal":
-				lit = new literalXml();
+				lit = new entitatsXml.literal();
 				lit.setId(attributes.getValue("id"));
 				break;
 			}
@@ -103,7 +103,7 @@ public class literalSAX {
 	public String obtenirLiteral(String literal) {
 		try {
 			if (this._carregat) {
-				List<literalXml> auxLits = _literals.stream() // convert list to stream
+				List<entitatsXml.literal> auxLits = _literals.stream() // convert list to stream
 						.filter(lit -> literal.equals(lit.getId())) // we dont like mkyong
 						.collect(Collectors.toList());
 				if (auxLits != null && auxLits.size() > 0) {

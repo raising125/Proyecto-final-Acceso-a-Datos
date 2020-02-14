@@ -1,5 +1,5 @@
 package presentacio;
 
-public class presentacioConsola {
+public class presentacioConsola extends presentacio {
 
 }
