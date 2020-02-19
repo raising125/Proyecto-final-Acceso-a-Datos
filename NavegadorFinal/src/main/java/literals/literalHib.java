@@ -1,5 +1,6 @@
 package literals;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -12,82 +13,59 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
+import entitatsHib.configuracio;
+import entitatsHib.idioma;
 import entitatsHib.literal;
 import entitatsHib.log;
+import entitatsHib.usuari;
 
-public class literalHib {
-	private static Session _session;
-	private static ArrayList<String> logs = new ArrayList<String>();
-	private static ArrayList<Date> fechas = new ArrayList<Date>();
+public class literalHib extends literal{
+	private Session _session;
+	private static SessionFactory sessionFactory;
 	
-	public literalHib(Session reciveSession){
-		this._session =reciveSession;
+	public literalHib(){
+		this._session =literalHib.getSessionFactory().openSession();
 	}
+	
+    public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            try {
+        		Configuration configuration = new Configuration().configure(new File("hibernate.cfg.xml"));		//se crea la config para hibernate desde xml
+        		configuration.addAnnotatedClass(configuracio.class); 
+        		configuration.addAnnotatedClass(idioma.class); 
+        		configuration.addAnnotatedClass(literal.class);
+        		configuration.addAnnotatedClass(log.class); 
+        		configuration.addAnnotatedClass(usuari.class); 
+        		ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                    .applySettings(configuration.getProperties()).build();
+                sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+                
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return sessionFactory;
+    }
 	
 	//metodo cargarDesdeBD: carga el texto de los errores y demas desde la base de datos.
 	//param: el lit_clau de la tabla literal
-	public static String cargarDesdeBD(String idioma, String buscar){
-		List<literal> listEle = (List<literal>) _session.createQuery(" FROM Literal WHERE idi_cod= '"+idioma+"' AND lit_clau='"+buscar+"'").list();
-		String respuesta="";
-		respuesta=listEle.get(0).get_error();
-		return respuesta;
-	}
-		
-	//metodo limpiarLog: borra el contenido de la tabla log de la base de datos
-	public static void limpiarLog(){
-		_session.beginTransaction();
-		_session.createSQLQuery("TRUNCATE TABLE LOG").executeUpdate();
-		_session.getTransaction().commit();
-		_session.clear();
-		System.out.println(">> Historial borrado...");
-	}
-	
-	//metodo logear: comprueba si login esta activado y guarda en el historial, cada 10 logs envia a la base de datos
-	//param: texto a guardar en el historial
-	public static void logear(Boolean login, String log){
-		try{
-			if(login==true){
-				if(logs.size()<10 && fechas.size()<10){
-					logs.add(log);
-					Date fecha = new Date();
-					fechas.add(fecha);
-				}else{
-					for(int i=0;i<logs.size();i++){
-						log logii = new log();
-						logii.set_texto(logs.get(i));
-						logii.set_fecha(fechas.get(i));
-						_session.beginTransaction();
-						_session.save(logii);
-						_session.getTransaction().commit();
-						_session.clear();
-					}
-					System.out.println("------------------------");
-					System.out.println("Log actualizado");
-					logs = new ArrayList<String>();
-					fechas = new ArrayList<Date>();
-					logs.add(log);
-					Date fecha = new Date();
-					fechas.add(fecha);
-				}
-			}
-		}catch(Exception e){
-			System.out.println("------------------------");
-			System.out.println("Error al logear!");
-			e.printStackTrace();
+	@SuppressWarnings("unchecked")
+	public String get_literal(String idi, String code){
+		List<literal> list = (List<literal>) _session.createQuery(" FROM Literal WHERE idi_cod= '"+idi+"' AND lit_clau='"+code+"'").list();
+		if (list!=null && list.size()> 0) {
+			String respuesta = list.get(0).get_error();
+			return respuesta;
+		}else {
+			return null;
 		}
 	}
 	
-	//Deprecated: log: si el log esta activado este metodo guarda la informacion en el historial
-	public static void log(Boolean login, String text){
-		try{
-			if(login==true){
-				Path path= Paths.get("C:\\Users\\daniel\\workspace\\navegador\\log.txt");
-				Files.write(path, Arrays.asList(text), StandardCharsets.UTF_8, 
-				Files.exists(path) ? StandardOpenOption.APPEND : StandardOpenOption.CREATE);
-			}
-		}catch(IOException e){
-			System.out.println(e.getMessage());
-		}
+	public void close() {
+		_session.close();
 	}
 }
