@@ -41,12 +41,12 @@ public class configuracioMongoDB {
 																	// el codigo pasado por parámetro
 
 		MongoCollection<Document> collection = db.getCollection("literal");
-		Bson filter = Filters.and(Filters.eq("idi_cod", "es"), Filters.eq("lit_clau", codigo));
-		FindIterable<Document> iterable2 = collection.find(filter);
-		MongoCursor<Document> cursor2 = iterable2.iterator();
+		Bson filter = Filters.and(Filters.eq("idi_cod", "eng"), Filters.eq("lit_clau", codigo));
+		FindIterable<Document> iterable = collection.find(filter);
+		MongoCursor<Document> cursor = iterable.iterator();
 
 		System.out.println("------------");
-		System.out.println(cursor2.next().get("lit_text"));
+		System.out.println(cursor.next().get("lit_text"));
 
 	}
 
