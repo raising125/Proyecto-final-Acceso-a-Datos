@@ -28,11 +28,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import literals.gestioLiteral;
+
 
 public class utils {
 	// Objecte de InputChecker per a poder mirar l'imput per al Load
 		private tractarEntrada input;
 		private String currDir;
+		private gestioLiteral lits = new gestioLiteral();
 		public utils() {
 			input = new tractarEntrada();
 		}
@@ -291,7 +294,7 @@ public class utils {
 
 		
 		public void print(String s) {
-			//Triar quin print s'executa
+			System.out.println(lits.get_literal("eng", s));
 		}
 
 

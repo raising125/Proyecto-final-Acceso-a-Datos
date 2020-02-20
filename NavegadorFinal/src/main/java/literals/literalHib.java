@@ -47,7 +47,7 @@ public class literalHib extends literals.literal{
 	//param: el lit_clau de la tabla literal
 	@SuppressWarnings("unchecked")
 	public String get_literal(String idi, String code){
-		List<literal> list = (List<literal>) _session.createQuery(" FROM Literal WHERE idi_cod= '"+idi+"' AND lit_clau='"+code+"'").list();
+		List<literal> list = (List<literal>) _session.createQuery(" FROM literal WHERE idi_cod= '"+idi+"' AND lit_clau='"+code+"'").list();
 		if (list!=null && list.size()> 0) {
 			String respuesta = list.get(0).get_error();
 			return respuesta;

@@ -6,19 +6,16 @@ public class gestioLiteral {
 	private literalMongoDB mongo = new literalMongoDB();
 	public gestioLiteral() {}
 	
-	public void get_literal(String idi, String err) {
+	public String get_literal(String idi, String err) {
 		switch(option) {
 		case "hibernate":
-			hib.get_literal(idi, err);
-			break;
+			return hib.get_literal(idi, err);
 		
 		case "mongo":
-			mongo.get_literal(idi, err);
-			break;
+			return mongo.get_literal(idi, err);
 			
 		default:
-			hib.get_literal(idi, err);
-			break;
+			return hib.get_literal(idi, err);
 		}
 	}
 }
