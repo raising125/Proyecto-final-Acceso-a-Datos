@@ -15,7 +15,7 @@ import entitatsHib.literal;
 import entitatsHib.log;
 import entitatsHib.usuari;
 
-public class literalHib extends literal{
+public class literalHib extends literals.literal{
 	private Session _session;
 	private static SessionFactory sessionFactory;
 	

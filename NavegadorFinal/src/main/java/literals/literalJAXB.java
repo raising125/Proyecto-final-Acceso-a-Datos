@@ -8,7 +8,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-public class literalJAXB {
+public class literalJAXB{
 	private List<entitatsXml.literal> _literals;
 	private boolean _carregat;
 	private File _fitxerLiterals;

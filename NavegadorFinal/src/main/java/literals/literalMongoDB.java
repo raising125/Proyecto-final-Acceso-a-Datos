@@ -17,7 +17,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
 
-public class literalMongoDB {
+public class literalMongoDB extends literals.literal{
 	private MongoCollection<Document> collection;
 
 	public literalMongoDB() {
