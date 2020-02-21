@@ -8,3 +8,9 @@ CREATE TABLE `literal` (
   KEY `idi_cod` (`idi_cod`),
   CONSTRAINT `literal_ibfk_1` FOREIGN KEY (`idi_cod`) REFERENCES `idioma` (`idi_cod`) ON DELETE CASCADE ON UPDATE RESTRICT
 );
+
+INSERT INTO IDIOMA values(1,'CAT');
+INSERT INTO IDIOMA values(2,'ENG');
+INSERT INTO IDIOMA values(3,'ES');
+
+
