@@ -1,3 +1,9 @@
+INSERT INTO IDIOMA values(1,'CAT');
+INSERT INTO IDIOMA values(2,'ENG');
+INSERT INTO IDIOMA values(3,'ES');
+
+
+
 INSERT INTO LITERAL VALUES(NULL,'ES','NODIR','Directorio no encontrado.');
 INSERT INTO LITERAL VALUES(NULL,'CAT','NODIR','Directori no trobat.');
 INSERT INTO LITERAL VALUES(NULL,'ENG','NODIR','The directory dosen´t exist.');
