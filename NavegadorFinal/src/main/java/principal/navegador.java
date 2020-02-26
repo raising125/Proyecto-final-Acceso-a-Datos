@@ -25,7 +25,7 @@ public class navegador {
 		File dir = null;
 		while (!done) {
 			dir = new File(s.nextLine());
-			if (dir.exists() && dir.isDirectory()) {
+			if (dir.isDirectory()) {
 				done = true;
 			} else {
 				System.out.println("Not a valid directory");
