@@ -29,6 +29,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import literals.gestioLiteral;
+import logs.gestioLog;
 
 
 public class utils {
@@ -36,6 +37,7 @@ public class utils {
 		private tractarEntrada input;
 		private String currDir;
 		private gestioLiteral lits = new gestioLiteral();
+		private gestioLog logs = new gestioLog();
 		public utils() {
 			input = new tractarEntrada();
 		}
@@ -281,15 +283,14 @@ public class utils {
 		}
 
 		public void log(String text) {
-			
+			logs.log(text);
 		}
 
 		
 		public void clear() {
 			deleteFile("C:\\Users\\Alumnat\\Documents\\log.txt");
-			//hibutil.clean();
-			//monutil.clean();
-			//dba.clean();
+			logs.clear();
+
 		}
 
 		

@@ -3,13 +3,11 @@ package principal;
 import java.io.File;
 import java.util.Scanner;
 
-
 public class navegador {
 	protected enum commandType {
-		LOGIN, GOTO, GOLAST, LIST, UP, INFOFILE, INFODIR, HELP, CREATEDIR, CREATEFILE, 
-		SORTBY, DELETEDIR, DELETEFILE, LOADFILE, EXEC, CLEARLOG, IDIOMA, SAVEXMLTREE,
-		LOADXMLTREE, GETERRORS, GETWARNINGS, SETPERMISSION, SAVEJSONTREE, LOADJSONTREE,
-		SETLITERAL, EXIT
+		LOGIN, GOTO, GOLAST, LIST, UP, INFOFILE, INFODIR, HELP, CREATEDIR, CREATEFILE, SORTBY, DELETEDIR, DELETEFILE,
+		LOADFILE, EXEC, CLEARLOG, IDIOMA, SAVEXMLTREE, LOADXMLTREE, GETERRORS, GETWARNINGS, SETPERMISSION, SAVEJSONTREE,
+		LOADJSONTREE, SETLITERAL, EXIT
 	}
 
 	private static Scanner s;
@@ -84,7 +82,7 @@ public class navegador {
 					temp = utils.up(dir);
 					if (temp == null) {
 						utils.print("nodir");
-					}else {
+					} else {
 						prevdir = dir;
 						dir = temp;
 						utils.list(dir, null);
